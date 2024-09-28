@@ -1,0 +1,45 @@
+pipeline {
+
+    agent any
+
+    environment {
+        myString = "Hello World"
+        myNumber = 1000
+        myBool = true
+    }
+
+
+    stages {
+
+        stage("Demo One") {
+            steps {
+                script {
+                    echo "myString: ${myString}"
+                    echo "myNumber: ${myNumber}"
+
+                }
+            }
+        }
+
+        stage("Demo Two") {
+            steps {
+                script {
+                    localVar = "This is local variable"
+                    echo "${localVar}"
+
+                    def buildStatus = true
+                    if (buildStatus) {
+                        echo "Build successful"
+                    } else {
+                        echo "Build failed"
+                    }
+
+                }
+            }
+        }
+
+
+    }
+
+
+}

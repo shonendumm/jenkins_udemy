@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+    environment {
+        PATH="/Users/soohian/.pyenv/bin:/Users/soohian/opt/anaconda3/bin:/Users/soohian/opt/anaconda3/condabin:/Users/soohian/apache-maven-3.9.6/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/homebrew/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/usr/local/go/bin"
+    }
+    stages {
+        stage('Cleanup') {
+            steps {
+                deleteDir()
+            }
+        }
+        stage('Copy Files') {
+            steps {
+                sh "git clone https://github.com/jenkins-docs/simple-java-maven-app.git"
+            }
+        }
+        stage('Install Maven') {
+            steps {
+                dir('simple-java-maven-app') {
+                    sh "mvn clean install"
+                }
+            }
+        }
+        stage('Testing') {
+            steps {
+                dir('simple-java-maven-app') {
+                    sh "mvn test"
+                }
+            }
+        }
+    }
+}

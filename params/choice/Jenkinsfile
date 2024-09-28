@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    
+    parameters {
+        choice(choices: ['US-WEST-1', 'US-WEST-2'], description: "Which region to deploy to?", name:"region")
+        }
+    
+    
+    stages {
+        stage("Demo") {
+            steps {
+                echo "Choice is set to: ${params.region}"
+            }
+        }
+    }
+
+}
