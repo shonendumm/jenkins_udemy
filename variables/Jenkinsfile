@@ -3,6 +3,7 @@ pipeline {
     agent any
 
     environment {
+        // global vars
         myString = "Hello World"
         myNumber = 1000
         myBool = true
@@ -23,7 +24,8 @@ pipeline {
 
         stage("Demo Two") {
             steps {
-                script {
+                script { // using groovy script allows us to use conditionals
+                    // local var
                     localVar = "This is local variable"
                     echo "${localVar}"
 
