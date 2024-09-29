@@ -1,0 +1,19 @@
+def myStages = ['First', 'Second']
+
+def deployStages = { stageName ->
+    stage("Deploying ${stageName}") {
+        echo "This is stage: ${stageName}"
+    }
+}
+
+// use scripted pipeline
+node {
+    stage('Starting') {
+        echo "Starting now..."
+    }
+    
+    // Dynamically define stages
+    myStages.each { stageName ->
+        deployStages(stageName)
+    }
+}
