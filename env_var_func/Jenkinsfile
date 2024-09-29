@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    environment {
+        // global vars can be used anywhere, even in functions.
+        myString = "This is a string"
+    }
+
+    stages {
+        stage("Use Env") {
+            steps {
+                echo "The env var is: ${myString}."
+            }
+        }   
+        stage("Demo") {
+            steps {
+                myFunc()
+            }
+        }
+    }
+}
+
+def myFunc() {
+    echo "Can you see the env var here? ${myString}"
+}
