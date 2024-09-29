@@ -1,0 +1,16 @@
+pipeline {
+
+    agent any
+    stages {
+        stage("Demo") {
+            steps {
+                myFunc("Hello from myFunc!!!")
+            }
+        }
+    }
+}
+
+
+def myFunc(String text) {
+    echo "Function called: ${text}"
+}
