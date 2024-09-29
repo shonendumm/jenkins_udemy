@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Initialize") {
+            steps {
+                script {
+                    def myFunc = { text -> 
+                        echo "${text}"
+                        }
+
+                    // can only call the closure here:
+                    myFunc("Hello from closure function call")
+                }
+            }
+        }
+
+
+        stage("Demo") {
+            steps {
+                script {
+                    // cannot call the closure here:
+                    myFunc("This is not shown")
+                }
+            }
+        }
+    }
+}
+
+
+    
