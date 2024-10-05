@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Demo") {
+            steps {
+                script {
+                    withEnv(['MYVAR=hello_soo']) {
+                        
+                        // single quotes - groovy takes the str literally. No interpolation
+                        echo 'Message: ${MYVAR}'
+
+                        // double quotes for groovy to handle str interpolation
+                        echo "Message: ${MYVAR}" 
+
+                        // single quotes for shell to handle str interpolation for env vars
+                        // notice the 'sh'
+                        sh 'echo Message: ${MYVAR}'
+
+                    }
+                }
+            }
+        }
+    }
+}

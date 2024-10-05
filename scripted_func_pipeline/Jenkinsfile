@@ -1,0 +1,19 @@
+stages = ["Dev", "Test", "Prod"]
+
+deployStages = { stageName ->
+    stage("${stageName}") {
+        echo "Deploying ${stageName} now..."
+    } 
+}
+
+// Use scripted pipeline
+
+node {
+
+    stage("Start") {
+        echo "Starting now..."
+    }
+
+    stages.each{stageName ->
+        deployStages(stageName)}
+}
