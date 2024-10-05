@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage("Demo") {
+            steps {
+                echo "starting demo..."
+            }
+        }
+
+        stage("Build remote") {
+            steps{
+                // enter the name of another pipeline
+                build 'withEnv_scope'
+            }
+        }
+
+        stage("Build job passing params") {
+            steps {
+                build job: 'boolParams', 
+                    parameters: [booleanParam(name: 'myBoolean', value: true)] // parameters must be passed in as a list
+            }
+        }
+
+
+    }
+
+
+}
