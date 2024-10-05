@@ -1,31 +1,33 @@
 pipeline {
     agent any
 
+    environment {
+        // Declare a global variable to hold the closure
+        myFunc = null
+    }
+
     stages {
         stage("Initialize") {
             steps {
                 script {
-                    def myFunc = { text -> 
+                    // Define the closure and assign it to a global variable
+                    myFunc = { text -> 
                         echo "${text}"
-                        }
+                    }
 
-                    // can only call the closure here:
-                    myFunc("Hello from closure function call")
+                    // Call the closure in this stage
+                    myFunc("Hello from closure function call in Initialize")
                 }
             }
         }
 
-
         stage("Demo") {
             steps {
                 script {
-                    // cannot call the closure here:
-                    myFunc("This is not shown")
+                    // Call the closure in this stage
+                    myFunc("Hello from closure function call in Demo")
                 }
             }
         }
     }
 }
-
-
-    
